@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bottom_nav_chats"
+        android:title="Chats"
+        android:icon="@drawable/chat_icon"
+        app:cnb_backgroundColor="#E91E63"/>
+    <item
+        android:id="@+id/bottom_nav_groups"
+        android:title="Groups"
+        android:icon="@drawable/groups_icon"
+        app:cnb_backgroundColor="#FF9800"/>
+    <item
+        android:id="@+id/bottom_nav_contacts"
+        android:title="Contacts"
+        android:icon="@drawable/contacts_icon"
+        app:cnb_backgroundColor="#8BC34A"/>
+    <item
+        android:id="@+id/bottom_nav_requests"
+        android:title="Requests"
+        android:icon="@drawable/requests_icon"
+        app:cnb_backgroundColor="#673AB7"/>
+
+</menu>

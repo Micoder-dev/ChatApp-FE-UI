@@ -17,23 +17,25 @@
             layout="@layout/app_bar_layout">
         </include>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/main_tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:tabTextAppearance="@style/MineCustomTabText">
-
-        </com.google.android.material.tabs.TabLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/main_tabs_pager"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/appBarLayout">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_nav_menu"
+        android:layout_below="@+id/appBarLayout"/>
 
-    </androidx.viewpager.widget.ViewPager>
-
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottom_nav_menu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        app:cnb_menuResource="@menu/bottom_nav_menu"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_corners"
+        app:cnb_unselectedColor="@color/black"
+        app:cnb_radius="30dp"
+        app:cnb_orientationMode="horizontal"
+        android:elevation="8dp"/>
 </RelativeLayout>

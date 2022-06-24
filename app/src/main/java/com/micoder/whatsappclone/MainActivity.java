@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.DialogInterface;
@@ -25,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,13 +35,12 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolBar;
-    private ViewPager myViewPager;
-    private TabLayout myTabLayout;
-    private TabsAccessorAdpater myTabsAccessorAdpater;
 
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
     private String currentUserID;
+
+    private ChipNavigationBar chipNavigationBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +55,38 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolBar);
         getSupportActionBar().setTitle("WhatsApp");
 
-        myViewPager = (ViewPager) findViewById(R.id.main_tabs_pager);
-        myTabsAccessorAdpater = new TabsAccessorAdpater(getSupportFragmentManager());
-        myViewPager.setAdapter(myTabsAccessorAdpater);
+        chipNavigationBar = findViewById(R.id.bottom_nav_menu);
+        chipNavigationBar.setItemSelected(R.id.bottom_nav_chats, true);
 
-        myTabLayout = (TabLayout) findViewById(R.id.main_tabs);
-        myTabLayout.setupWithViewPager(myViewPager);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChatsFragment()).commit();
 
+        bottomMenu();
+
+    }
+
+    private void bottomMenu() {
+        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+                Fragment fragment = null;
+                switch (i) {
+                    case R.id.bottom_nav_chats:
+                        fragment = new ChatsFragment();
+                        break;
+                    case R.id.bottom_nav_groups:
+                        fragment = new GroupsFragment();
+                        break;
+                    case R.id.bottom_nav_contacts:
+                        fragment = new ContactsFragment();
+                        break;
+                    case R.id.bottom_nav_requests:
+                        fragment = new RequestsFragment();
+                        break;
+                }
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            }
+        });
     }
 
     @Override

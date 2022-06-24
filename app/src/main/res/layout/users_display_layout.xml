@@ -45,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="user name"
+                    android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
 
@@ -54,39 +55,10 @@
                 android:id="@+id/user_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:text="user status"
-                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
                 android:textSize="12sp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/request_accept_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="Accept"
-                    android:textSize="12sp"
-                    android:textAllCaps="false"
-                    android:backgroundTint="@android:color/holo_green_light"
-                    android:textColor="@color/black"
-                    android:visibility="gone"/>
-
-                <Button
-                    android:id="@+id/request_cancel_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="Cancel"
-                    android:layout_marginStart="10dp"
-                    android:textSize="12sp"
-                    android:textAllCaps="false"
-                    android:backgroundTint="@android:color/holo_red_light"
-                    android:textColor="@color/white"
-                    android:visibility="gone"/>
-
-            </LinearLayout>
 
         </LinearLayout>
 

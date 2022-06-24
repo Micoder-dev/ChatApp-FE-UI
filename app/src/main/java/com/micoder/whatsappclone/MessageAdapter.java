@@ -44,7 +44,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         public TextView senderMessageText, receiverMessageText;
         public CircleImageView receiverProfileImage;
-        public ImageView messageSenderPicture, messageReceiverPicture;
+        public ImageView messageSenderPicture, messageReceiverPicture, messageSenderFile, messageReceiverFile;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,6 +54,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             receiverProfileImage = (CircleImageView) itemView.findViewById(R.id.message_profile_image);
             messageReceiverPicture = itemView.findViewById(R.id.message_receiver_image_view);
             messageSenderPicture = itemView.findViewById(R.id.message_sender_image_view);
+            messageSenderFile = itemView.findViewById(R.id.message_sender_file_view);
+            messageReceiverFile = itemView.findViewById(R.id.message_receiver_file_view);
+
         }
     }
 
@@ -103,6 +106,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         messageViewHolder.senderMessageText.setVisibility(View.GONE);
         messageViewHolder.messageSenderPicture.setVisibility(View.GONE);
         messageViewHolder.messageReceiverPicture.setVisibility(View.GONE);
+        messageViewHolder.messageSenderFile.setVisibility(View.GONE);
+        messageViewHolder.messageReceiverFile.setVisibility(View.GONE);
 
         if (fromMessageType.equals("text")) {
 
@@ -138,24 +143,24 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
         else if (fromMessageType.equals("pdf") || fromMessageType.equals("docx")) {
             if (fromUserID.equals(messageSenderID)) {
-                messageViewHolder.messageSenderPicture.setVisibility(View.VISIBLE);
+                messageViewHolder.messageSenderFile.setVisibility(View.VISIBLE);
 
                 //messageViewHolder.messageSenderPicture.setBackgroundResource(R.drawable.file);
                 //load your picture link from firbase to avoid the file img bug
                 Picasso.get()
                         .load("https://firebasestorage.googleapis.com/v0/b/whatsapp-clone-78bd0.appspot.com/o/Image_Files%2Ffile.png?alt=media&token=3fc1b123-907a-406e-b37a-5d59f5be342e")
-                        .placeholder(R.drawable.file).into(messageViewHolder.messageSenderPicture);
+                        .placeholder(R.drawable.file).into(messageViewHolder.messageSenderFile);
 
             }
             else {
                 messageViewHolder.receiverProfileImage.setVisibility(View.VISIBLE);
-                messageViewHolder.messageReceiverPicture.setVisibility(View.VISIBLE);
+                messageViewHolder.messageReceiverFile.setVisibility(View.VISIBLE);
 
                 //messageViewHolder.messageReceiverPicture.setBackgroundResource(R.drawable.file);
                 //load your picture link from firbase to avoid the file img bug
                 Picasso.get()
                         .load("https://firebasestorage.googleapis.com/v0/b/whatsapp-clone-78bd0.appspot.com/o/Image_Files%2Ffile.png?alt=media&token=3fc1b123-907a-406e-b37a-5d59f5be342e")
-                        .placeholder(R.drawable.file).into(messageViewHolder.messageReceiverPicture);
+                        .placeholder(R.drawable.file).into(messageViewHolder.messageReceiverFile);
 
             }
         }

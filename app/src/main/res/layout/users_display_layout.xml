@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <soup.neumorphism.NeumorphCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:neumorph_shapeType="basin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,8 +17,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/users_profile_image"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:src="@drawable/profile_image"/>
 
         <LinearLayout
@@ -31,14 +37,14 @@
                     android:layout_height="18dp"
                     android:src="@drawable/online"
                     android:layout_marginTop="5dp"
-                    android:visibility="invisible"/>
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/user_profile_name"
-                    android:layout_width="200dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="user name"
-                    android:textAlignment="textStart"
+                    android:textAlignment="center"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
 
@@ -49,8 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="user status"
-                android:textAlignment="textStart"
-                android:textSize="16sp"/>
+                android:textAlignment="center"
+                android:textSize="12sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,11 +68,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="Accept"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:textAllCaps="false"
                     android:backgroundTint="@android:color/holo_green_light"
                     android:textColor="@color/black"
-                    android:visibility="invisible"/>
+                    android:visibility="gone"/>
 
                 <Button
                     android:id="@+id/request_cancel_btn"
@@ -74,16 +80,18 @@
                     android:layout_height="40dp"
                     android:text="Cancel"
                     android:layout_marginStart="10dp"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:textAllCaps="false"
                     android:backgroundTint="@android:color/holo_red_light"
                     android:textColor="@color/white"
-                    android:visibility="invisible"/>
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
+    </soup.neumorphism.NeumorphCardView>
 
 </RelativeLayout>

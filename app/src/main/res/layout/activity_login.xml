@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:id="@+id/login_relativeLayout"
+    android:visibility="invisible">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,109 +20,160 @@
             <ImageView
                 android:id="@+id/login_image"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:src="@drawable/login_photo"
+                android:layout_height="200dp"
+                android:src="@drawable/login_top"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:scaleType="fitCenter"/>
-            <EditText
-                android:id="@+id/login_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/login_image"
-                android:hint="Email..."
-                android:inputType="textEmailAddress"
-                android:background="@drawable/inputs"
-                android:padding="4dp"
-                android:drawableStart="@drawable/email"
-                android:layout_marginTop="25dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"/>
-            <EditText
-                android:id="@+id/login_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/login_email"
-                android:hint="Password..."
-                android:inputType="textPassword"
-                android:background="@drawable/inputs"
-                android:padding="4dp"
-                android:drawableStart="@drawable/password"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"/>
-            <TextView
-                android:id="@+id/forget_password_link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/login_password"
-                android:text="Forget Password ?"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="23dp"
-                android:textAlignment="textEnd"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"/>
-            <Button
-                android:id="@+id/login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/forget_password_link"
-                android:padding="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="19dp"
-                android:layout_marginRight="19dp"
-                android:text="Login"
-                android:textAllCaps="false"
-                android:textSize="24sp"
-                android:textColor="@android:color/background_light"
-                android:background="@drawable/buttons" />
-            <TextView
+
+
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
                 android:id="@+id/need_new_account_link"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/login_button"
-                android:text="Need new Account ?"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="23dp"
+                android:layout_below="@+id/login_image"
+                android:text="New User"
                 android:textAlignment="center"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"/>
-            <TextView
-                android:id="@+id/login_using"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/need_new_account_link"
-                android:text="or Login using your"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="23dp"
-                android:textAlignment="textEnd"
-                android:textSize="17sp"
-                android:textStyle="bold"/>
-            <Button
-                android:id="@+id/phone_login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/login_using"
-                android:padding="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="19dp"
-                android:layout_marginRight="19dp"
-                android:text="Phone"
+                android:textColor="@color/textColor"
                 android:textAllCaps="false"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentEnd="true"
+                app:neumorph_shadowColorLight="#DBE0FA"
+                android:drawableRight="@drawable/arrow_right"
+                android:drawableTint="@color/textColor"/>
+
+            <TextView
+                android:id="@+id/welcome_back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome Back"
+                android:textColor="@color/textColor"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_below="@+id/need_new_account_link"/>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/neumorph_edt_email"
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="1dp"
+                app:neumorph_shapeType="pressed"
+                android:layout_below="@+id/welcome_back">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="0dp"
+                    android:layout_marginTop="-10dp"
+                    app:hintTextColor="@color/textColor">
+                <EditText
+                    android:id="@+id/login_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textEmailAddress"
+                    android:importantForAutofill="no"
+                    android:hint="email@gmail.com"
+                    android:background="@drawable/no_background"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/textColor"
+                    android:drawableStart="@drawable/email"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/neumorph_edt_pass"
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
+                app:neumorph_shapeType="pressed"
+                android:layout_below="@+id/neumorph_edt_email">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:passwordToggleEnabled="true"
+                    android:textColorHint="@android:color/darker_gray"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidth="0dp"
+                    android:layout_marginTop="-10dp"
+                    app:hintTextColor="@color/textColor">
+                <EditText
+                    android:id="@+id/login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword"
+                    android:hint="password"
+                    android:background="@drawable/no_background"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/textColor"
+                    android:drawableStart="@drawable/password"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </soup.neumorphism.NeumorphCardView>
+
+            <TextView
+                android:id="@+id/forgot_password_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password?"
+                android:layout_below="@+id/neumorph_edt_pass"
+                android:textAlignment="textEnd"
+                android:paddingEnd="20dp"
+                android:textSize="18sp"
+                android:textColor="@color/textColor"/>
+
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
+                android:id="@+id/login_button"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/forgot_password_link"
+                android:text="Login"
+                android:textAlignment="center"
+                android:textColor="@color/textColor"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                app:neumorph_shadowColorLight="#EFEDED"/>
+
+            <TextView
+                android:id="@+id/tv_or"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OR"
+                android:textAlignment="center"
+                android:textStyle="bold"
                 android:textSize="14sp"
-                android:textColor="@android:color/background_light"
-                android:background="@drawable/buttons"
-                android:drawableLeft="@drawable/phone"/>
+                android:layout_below="@+id/login_button"/>
+
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
+                android:id="@+id/phone_login_button"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_or"
+                android:text="Phone Login"
+                android:textAlignment="center"
+                android:textColor="@color/textColor"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                app:neumorph_shadowColorLight="#EFEDED"
+                android:drawableStart="@drawable/phone"/>
+
+
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

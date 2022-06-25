@@ -18,9 +18,4 @@
 
     </style>
 
-    <style name="MineCustomTabText" parent="Base.Widget.Design.TabLayout">
-        <item name="android:textSize">30sp</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
 </resources>

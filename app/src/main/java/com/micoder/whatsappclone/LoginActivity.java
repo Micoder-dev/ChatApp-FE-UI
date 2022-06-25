@@ -6,10 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +32,26 @@ public class LoginActivity extends AppCompatActivity {
     private EditText UserEmail, UserPassword;
     private TextView NeedNewAccountLink, ForgetPasswordLink;
     private ProgressDialog loadingBar;
+    private Animation animation_fadein;
+    private RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Fade in anim
+        relativeLayout = findViewById(R.id.login_relativeLayout);
+        animation_fadein = AnimationUtils.loadAnimation(LoginActivity.this,R.anim.fade_in);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                relativeLayout.setVisibility(View.VISIBLE);
+                relativeLayout.setAnimation(animation_fadein);
+            }
+        },0);
+        //hide keyboard when activity starts
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -64,10 +85,19 @@ public class LoginActivity extends AppCompatActivity {
         String password = UserPassword.getText().toString();
 
         if (TextUtils.isEmpty(email)){
-            Toast.makeText(this, "Please enter Email...", Toast.LENGTH_SHORT).show();
+            UserEmail.setError("Email required");
+            UserEmail.requestFocus();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            UserEmail.setError("Please enter a valid email");
+            UserEmail.requestFocus();
+            return;
         }
         if (TextUtils.isEmpty(password)){
-            Toast.makeText(this, "Please enter Password...", Toast.LENGTH_SHORT).show();
+            UserPassword.setError("Password required");
+            UserPassword.requestFocus();
+            return;
         }
         else {
             loadingBar.setTitle("Logging in...");
@@ -100,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         UserEmail = (EditText) findViewById(R.id.login_email);
         UserPassword = (EditText) findViewById(R.id.login_password);
         NeedNewAccountLink = (TextView) findViewById(R.id.need_new_account_link);
-        ForgetPasswordLink = (TextView) findViewById(R.id.forget_password_link);
+        ForgetPasswordLink = (TextView) findViewById(R.id.forgot_password_link);
         loadingBar = new ProgressDialog(this);
     }
 

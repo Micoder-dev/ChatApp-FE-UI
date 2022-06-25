@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
-    tools:context=".ChatActivity">
+    tools:context=".ChatActivity"
+    android:id="@+id/chat_activity">
 
     <include
         android:id="@+id/chat_toolbar"

@@ -13,6 +13,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +44,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -70,6 +75,7 @@ public class ChatActivity extends AppCompatActivity {
     private String saveCurrentTime, saveCurrentDate;
     private ProgressDialog loadingBar;
     private StorageReference userFileRef;
+    private RelativeLayout chatBG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +186,8 @@ public class ChatActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         userMessagesList.setLayoutManager(linearLayoutManager);
         userMessagesList.setAdapter(messageAdapter);
+
+        chatBG = findViewById(R.id.chat_activity);
 
         loadingBar = new ProgressDialog(this);
 
@@ -457,4 +465,28 @@ public class ChatActivity extends AppCompatActivity {
                 });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/whatsapp-clone-78bd0.appspot.com/o/Image_Files%2Fcbg.jpg?alt=media&token=d0818f4a-69e3-4d76-a535-5dcdad52d9fe")
+                .placeholder(R.drawable.login_photo)
+                .into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        chatBG.setBackground(new BitmapDrawable(bitmap));
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                        Toast.makeText(ChatActivity.this, "Error : loading wallpaper", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                });
+
+    }
 }

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
-    private String currentUserID, currentUser;
+    private String currentUserID;
 
     private ChipNavigationBar chipNavigationBar;
 

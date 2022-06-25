@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,10 +60,24 @@ public class RegisterActivity extends AppCompatActivity {
         String password = UserPassword.getText().toString();
 
         if (TextUtils.isEmpty(email)){
-            Toast.makeText(this, "Please enter Email...", Toast.LENGTH_SHORT).show();
+            UserEmail.setError("Email required");
+            UserEmail.requestFocus();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            UserEmail.setError("Please enter a valid email");
+            UserEmail.requestFocus();
+            return;
         }
         if (TextUtils.isEmpty(password)){
-            Toast.makeText(this, "Please enter Password...", Toast.LENGTH_SHORT).show();
+            UserPassword.setError("Password required");
+            UserPassword.requestFocus();
+            return;
+        }
+        if(password.length() < 6){
+            UserPassword.setError("Password must be greater than 6");
+            UserPassword.requestFocus();
+            return;
         }
         else {
             loadingBar.setTitle("Creating New Account");

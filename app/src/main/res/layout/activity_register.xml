@@ -10,65 +10,118 @@
         android:id="@+id/register_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:src="@drawable/signup_photo"
+        android:src="@drawable/register_top"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:scaleType="fitCenter"/>
-    <EditText
-        android:id="@+id/register_email"
+        android:scaleType="fitXY"/>
+
+
+    <TextView
+        android:id="@+id/register_welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/register_image"
-        android:hint="Email..."
-        android:inputType="textEmailAddress"
-        android:background="@drawable/inputs"
-        android:padding="4dp"
-        android:drawableStart="@drawable/email"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"/>
-    <EditText
-        android:id="@+id/register_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/register_email"
-        android:hint="Password..."
-        android:inputType="textPassword"
-        android:background="@drawable/inputs"
-        android:padding="4dp"
-        android:drawableStart="@drawable/password"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"/>
-    <Button
-        android:id="@+id/register_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/register_password"
-        android:padding="4dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="19dp"
-        android:layout_marginRight="19dp"
-        android:text="Create Account"
-        android:textAllCaps="false"
+        android:text="Welcome"
+        android:textColor="@color/textColor"
         android:textSize="24sp"
-        android:textColor="@android:color/background_light"
-        android:background="@drawable/buttons" />
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/register_image"/>
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorph_edt_email"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="1dp"
+        app:neumorph_shapeType="pressed"
+        android:layout_below="@+id/register_welcome">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColorHint="@android:color/darker_gray"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            android:layout_marginTop="-10dp"
+            app:hintTextColor="@color/textColor">
+            <EditText
+                android:id="@+id/register_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress"
+                android:importantForAutofill="no"
+                android:hint="email@gmail.com"
+                android:background="@drawable/no_background"
+                android:textCursorDrawable="@drawable/cursor"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/textColor"
+                android:drawableStart="@drawable/email"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorph_edt_pass"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        app:neumorph_shapeType="pressed"
+        android:layout_below="@+id/neumorph_edt_email">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:passwordToggleEnabled="true"
+            android:textColorHint="@android:color/darker_gray"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            android:layout_marginTop="-10dp"
+            app:hintTextColor="@color/textColor">
+            <EditText
+                android:id="@+id/register_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:hint="password"
+                android:background="@drawable/no_background"
+                android:textCursorDrawable="@drawable/cursor"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/textColor"
+                android:drawableStart="@drawable/password"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphButton
+        style="@style/Widget.Neumorph.Button"
+        android:id="@+id/register_button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/neumorph_edt_pass"
+        android:text="Register"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        app:neumorph_shadowColorLight="#EFEDED"/>
+
+
     <TextView
         android:id="@+id/already_have_account_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/register_button"
-        android:text="Already have an Account ?"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="23dp"
+        android:text="Already have an account?"
         android:textAlignment="center"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:paddingEnd="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/textColor"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"/>
+
 
 </RelativeLayout>

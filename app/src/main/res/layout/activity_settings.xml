@@ -20,57 +20,73 @@
         android:layout_marginTop="80dp"
         android:src="@drawable/profile_image"
         app:civ_border_width="5dp"
-        app:civ_border_color="@color/colorPrimary"/>
+        app:civ_border_color="#DDDDDD"/>
 
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorph_edt_name"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        app:neumorph_shapeType="pressed"
+        android:layout_below="@+id/set_profile_image">
     <EditText
         android:id="@+id/set_user_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/set_profile_image"
+        android:layout_height="match_parent"
         android:inputType="textMultiLine"
-        android:hint="username"
+        android:background="@drawable/no_background"
+        android:textCursorDrawable="@drawable/cursor"
         android:textAlignment="center"
-        android:drawableStart="@drawable/edit_profile"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        android:background="@drawable/inputs"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:padding="6dp"
-        android:layout_marginTop="10dp"/>
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/textColor"
+        android:hint="User Name"
+        android:textColorHint="@android:color/darker_gray"
+        android:drawableStart="@drawable/edit_profile"/>
+    </soup.neumorphism.NeumorphCardView>
 
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorph_edt_about"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        app:neumorph_shapeType="pressed"
+        android:layout_below="@+id/neumorph_edt_name">
     <EditText
         android:id="@+id/set_profile_status"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/set_user_name"
+        android:layout_height="match_parent"
         android:inputType="textMultiLine"
         android:hint="hey, i am available now."
         android:textAlignment="center"
-        android:drawableStart="@drawable/edit_status"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        android:background="@drawable/inputs"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:padding="6dp"
-        android:layout_marginTop="10dp"/>
+        android:background="@drawable/no_background"
+        android:textCursorDrawable="@drawable/cursor"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@android:color/darker_gray"
+        android:drawableStart="@drawable/edit_status"/>
+    </soup.neumorphism.NeumorphCardView>
 
-    <Button
+    <soup.neumorphism.NeumorphButton
+        style="@style/Widget.Neumorph.Button"
         android:id="@+id/update_settings_button"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/set_profile_status"
+        android:layout_below="@+id/neumorph_edt_about"
         android:text="Update"
         android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:background="@drawable/buttons"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:padding="6dp"
-        android:layout_marginTop="10dp"
+        android:textColor="@color/textColor"
         android:textAllCaps="false"
-        android:textSize="20sp"/>
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        app:neumorph_shadowColorLight="#EFEDED"/>
 
 </RelativeLayout>

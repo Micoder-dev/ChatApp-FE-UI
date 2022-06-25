@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
-    private String currentUserID;
+    private String currentUserID, currentUser;
 
     private ChipNavigationBar chipNavigationBar;
 
@@ -58,7 +58,9 @@ public class MainActivity extends AppCompatActivity {
         chipNavigationBar = findViewById(R.id.bottom_nav_menu);
         chipNavigationBar.setItemSelected(R.id.bottom_nav_chats, true);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChatsFragment()).commit();
+        if (mAuth.getCurrentUser() != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChatsFragment()).commit();
+        }
 
         bottomMenu();
 

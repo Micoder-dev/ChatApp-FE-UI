@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import soup.neumorphism.NeumorphCardView;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
 
@@ -45,6 +47,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         public TextView senderMessageText, receiverMessageText;
         public CircleImageView receiverProfileImage;
         public ImageView messageSenderPicture, messageReceiverPicture, messageSenderFile, messageReceiverFile;
+        public NeumorphCardView receiverCardText, senderCardText;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,6 +59,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             messageSenderPicture = itemView.findViewById(R.id.message_sender_image_view);
             messageSenderFile = itemView.findViewById(R.id.message_sender_file_view);
             messageReceiverFile = itemView.findViewById(R.id.message_receiver_file_view);
+            receiverCardText = itemView.findViewById(R.id.neumorph_receiver_text_card);
+            senderCardText = itemView.findViewById(R.id.neumorph_sender_text_card);
 
         }
     }
@@ -103,6 +108,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         messageViewHolder.receiverMessageText.setVisibility(View.GONE);
         messageViewHolder.receiverProfileImage.setVisibility(View.GONE);
+        messageViewHolder.receiverCardText.setVisibility(View.GONE);
+        messageViewHolder.senderCardText.setVisibility(View.GONE);
         messageViewHolder.senderMessageText.setVisibility(View.GONE);
         messageViewHolder.messageSenderPicture.setVisibility(View.GONE);
         messageViewHolder.messageReceiverPicture.setVisibility(View.GONE);
@@ -112,19 +119,28 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         if (fromMessageType.equals("text")) {
 
             if (fromUserID.equals(messageSenderID)) {
+
+                messageViewHolder.senderCardText.setVisibility(View.VISIBLE);
                 messageViewHolder.senderMessageText.setVisibility(View.VISIBLE);
                 messageViewHolder.senderMessageText.setBackgroundResource(R.drawable.sender_messages_layout);
                 messageViewHolder.senderMessageText.setTextColor(Color.BLACK);
-                messageViewHolder.senderMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
+
+                messageViewHolder.senderMessageText.setText(Html.fromHtml(
+                        "<font color=#000000>" + "<big>" + messages.getMessage() + "</big>"
+                                + "<br/>" + "<br/>" + "<small>" + "<small>" + messages.getTime()+ " - " + messages.getDate() + "</small>" + "</small>"));
+
             }
             else {
 
+                messageViewHolder.receiverCardText.setVisibility(View.VISIBLE);
                 messageViewHolder.receiverProfileImage.setVisibility(View.VISIBLE);
                 messageViewHolder.receiverMessageText.setVisibility(View.VISIBLE);
 
                 messageViewHolder.receiverMessageText.setBackgroundResource(R.drawable.receiver_messages_layout);
                 messageViewHolder.receiverMessageText.setTextColor(Color.BLACK);
-                messageViewHolder.receiverMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
+                messageViewHolder.receiverMessageText.setText(Html.fromHtml(
+                        "<font color=#000000>" + "<big>" + messages.getMessage() + "</big>"
+                                + "<br/>" + "<br/>" + "<small>" + "<small>" + messages.getTime()+ " - " + messages.getDate() + "</small>" + "</small>"));
             }
         }
         else if (fromMessageType.equals("image")) {
@@ -135,6 +151,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                     Picasso.get().load(messages.getMessage()).into(messageViewHolder.messageSenderPicture);
                 }
                 else {
+                    messageViewHolder.receiverCardText.setVisibility(View.VISIBLE);
                     messageViewHolder.receiverProfileImage.setVisibility(View.VISIBLE);
                     messageViewHolder.messageReceiverPicture.setVisibility(View.VISIBLE);
 
@@ -153,6 +170,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
             }
             else {
+                messageViewHolder.receiverCardText.setVisibility(View.VISIBLE);
                 messageViewHolder.receiverProfileImage.setVisibility(View.VISIBLE);
                 messageViewHolder.messageReceiverFile.setVisibility(View.VISIBLE);
 

@@ -11,19 +11,26 @@
         android:layout_marginTop="10dp"
         android:src="@drawable/profile_image"/>
 
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorph_receiver_text_card"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="23dp"
+        android:layout_toEndOf="@+id/message_profile_image"
+        app:neumorph_shapeType="pressed"
+        app:neumorph_shadowColorLight="#FDE0EA">
     <TextView
         android:id="@+id/receiver_message_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/message_profile_image"
         android:background="@drawable/receiver_messages_layout"
-        android:padding="10dp"
         android:text="receiver messages"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:maxWidth="220dp"/>
+    </soup.neumorphism.NeumorphCardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -81,18 +88,25 @@
             android:scaleType="centerCrop"/>
     </androidx.cardview.widget.CardView>
 
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorph_sender_text_card"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="23dp"
+        android:layout_alignParentEnd="true"
+        app:neumorph_shapeType="pressed"
+        app:neumorph_shadowColorLight="#DAF5F8">
     <TextView
         android:id="@+id/sender_message_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentTop="@+id/receiver_message_text"
         android:background="@drawable/sender_messages_layout"
         android:text="sender messages"
         android:textSize="14sp"
-        android:padding="10dp"
         android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:maxWidth="240dp"/>
+    </soup.neumorphism.NeumorphCardView>
 
 </RelativeLayout>

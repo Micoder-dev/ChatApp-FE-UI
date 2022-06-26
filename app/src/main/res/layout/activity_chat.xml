@@ -32,8 +32,9 @@
 
         <ImageButton
             android:id="@+id/send_files_btn"
-            android:layout_width="60dp"
-            android:layout_height="75dp"
+            android:layout_width="55dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="1dp"
             android:src="@drawable/send_files"
             android:layout_alignParentStart="true"
             android:layout_alignBottom="@+id/neumorph_edt_message"
@@ -44,11 +45,10 @@
             style="@style/Widget.Neumorph.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="1dp"
             app:neumorph_shapeType="pressed"
             android:layout_toEndOf="@+id/send_files_btn"
+            android:layout_marginRight="-20dp"
+            android:layout_marginLeft="-10dp"
             android:layout_toStartOf="@+id/send_message_btn">
         <EditText
             android:id="@+id/input_message"

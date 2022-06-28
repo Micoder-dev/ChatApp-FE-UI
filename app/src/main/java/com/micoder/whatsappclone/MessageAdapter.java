@@ -183,12 +183,39 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             }
         }
 
-
-
         if (fromUserID.equals(messageSenderID)) {
             messageViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    if (userMessagesList.get(position).getType().equals("image")) {
+                        Intent intent = new Intent(messageViewHolder.itemView.getContext(), ImageViewerActivity.class);
+                        intent.putExtra("url", userMessagesList.get(position).getMessage());
+                        messageViewHolder.itemView.getContext().startActivity(intent);
+                    }
+                }
+            });
+        }
+        else {
+            messageViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (userMessagesList.get(position).getType().equals("image")) {
+                        Intent intent = new Intent(messageViewHolder.itemView.getContext(), ImageViewerActivity.class);
+                        intent.putExtra("url", userMessagesList.get(position).getMessage());
+                        messageViewHolder.itemView.getContext().startActivity(intent);
+                    }
+                }
+            });
+        }
+
+
+
+        if (fromUserID.equals(messageSenderID)) {
+            messageViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
                     if (userMessagesList.get(position).getType().equals("pdf") || userMessagesList.get(position).getType().equals("docx")) {
                         CharSequence options[] = new CharSequence[]
                                 {
@@ -299,13 +326,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                         builder.show();
                     }
 
+                    return true;
                 }
             });
         }
         else {
-            messageViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            messageViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View v) {
+                public boolean onLongClick(View v) {
+
                     if (userMessagesList.get(position).getType().equals("pdf") || userMessagesList.get(position).getType().equals("docx")) {
                         CharSequence options[] = new CharSequence[]
                                 {
@@ -395,6 +424,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                         builder.show();
                     }
 
+
+                    return true;
                 }
             });
         }

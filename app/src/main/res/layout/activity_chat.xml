@@ -47,7 +47,6 @@
             android:layout_height="wrap_content"
             app:neumorph_shapeType="pressed"
             android:layout_toEndOf="@+id/send_files_btn"
-            android:layout_marginRight="-20dp"
             android:layout_marginLeft="-10dp"
             android:layout_toStartOf="@+id/send_message_btn">
         <EditText
@@ -57,7 +56,7 @@
             android:hint="Enter your message..."
             android:background="@drawable/no_background"
             android:padding="15dp"
-            android:maxLines="3" />
+            android:maxLines="4" />
         </soup.neumorphism.NeumorphCardView>
 
         <ImageButton
@@ -67,7 +66,9 @@
             android:src="@drawable/send_message"
             android:layout_alignParentEnd="true"
             android:backgroundTint="@color/white"
-            android:layout_alignBottom="@+id/neumorph_edt_message"/>
+            android:layout_alignBottom="@+id/neumorph_edt_message"
+            android:visibility="gone"
+            android:layout_marginLeft="-20dp"/>
 
     </RelativeLayout>
 

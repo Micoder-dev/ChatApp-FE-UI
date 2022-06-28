@@ -18,7 +18,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -93,6 +95,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
         InitializeControllers();
+        sendButtonVisibility();
 
         userName.setText(messageReceiverName);
         Picasso.get().load(messageReceiverImage).placeholder(R.drawable.profile_image).into(userImage);
@@ -488,5 +491,28 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    private void sendButtonVisibility() {
+        MessageInputText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().trim().length()==0){
+                    SendMessageButton.setVisibility(View.GONE);
+                } else {
+                    SendMessageButton.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 }

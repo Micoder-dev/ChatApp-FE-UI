@@ -1,5 +1,6 @@
 package com.micoder.whatsappclone;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -79,7 +80,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageViewHolder messageViewHolder, final int position) {
+    public void onBindViewHolder(@NonNull MessageViewHolder messageViewHolder, @SuppressLint("RecyclerView") final int position) {
         String messageSenderID = mAuth.getCurrentUser().getUid();
         Messages messages = userMessagesList.get(position);
 

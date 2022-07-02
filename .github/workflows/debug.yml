@@ -24,7 +24,7 @@ jobs:
     - name: Uploading Debug Apk and Files
       uses: actions/upload-artifact@v2
       with:
-        name: All
+        name: ChatAppUI
         path: |
             app/build/outputs/apk/debug
             app/build/generated

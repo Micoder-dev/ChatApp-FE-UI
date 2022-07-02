@@ -19,7 +19,7 @@ jobs:
     - name: Uploading Release Apk and Files
       uses: actions/upload-artifact@v2
       with:
-        name: All
+        name: ChatAppUI
         path: |
             app/build/outputs/apk/release
             app/build/generated

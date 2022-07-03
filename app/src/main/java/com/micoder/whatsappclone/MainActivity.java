@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.bottom_nav_chats:
                         fragment = new ChatsFragment();
                         break;
-                    case R.id.bottom_nav_groups:
-                        fragment = new GroupsFragment();
+                    case R.id.bottom_nav_newFriends:
+                        fragment = new FindFriendsFragment();
                         break;
                     case R.id.bottom_nav_contacts:
                         fragment = new ContactsFragment();
@@ -171,56 +171,8 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.main_settings_option){
             SendUserToSettingsActivityOptions();
         }
-        if (item.getItemId() == R.id.main_find_friends_option){
-            SendUserToFindFriendsActivity();
-        }
-        if (item.getItemId() == R.id.main_create_group_option){
-            RequestNewGroup();
-        }
 
         return true;
-    }
-
-    private void RequestNewGroup() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialog);
-        builder.setTitle("Enter Group Name : ");
-
-        final EditText groupNameField = new EditText(MainActivity.this);
-        groupNameField.setHint("e.g Coding Cafe");
-        builder.setView(groupNameField);
-
-        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String groupName = groupNameField.getText().toString();
-
-                if (TextUtils.isEmpty(groupName)){
-                    Toast.makeText(MainActivity.this, "Please write Group Name...", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    CreateNewGroup(groupName);
-                }
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-        builder.show();
-    }
-
-    private void CreateNewGroup(String groupName) {
-        RootRef.child("Groups").child(groupName).setValue("")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, groupName + " group is created successfully.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
     }
 
 
@@ -240,10 +192,6 @@ public class MainActivity extends AppCompatActivity {
     private void SendUserToSettingsActivityOptions() {
         Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(settingsIntent);
-    }
-    private void SendUserToFindFriendsActivity() {
-        Intent findFriendsIntent = new Intent(MainActivity.this, FindFriendsActivity.class);
-        startActivity(findFriendsIntent);
     }
 
     private void updateUserStatus(String state) {

@@ -8,8 +8,8 @@
         android:icon="@drawable/chat_icon"
         app:cnb_backgroundColor="#E91E63"/>
     <item
-        android:id="@+id/bottom_nav_groups"
-        android:title="Groups"
+        android:id="@+id/bottom_nav_newFriends"
+        android:title="Find Friends"
         android:icon="@drawable/groups_icon"
         app:cnb_backgroundColor="#FF9800"/>
     <item

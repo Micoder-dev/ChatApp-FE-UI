@@ -28,14 +28,7 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".FindFriendsActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
-        <activity
             android:name=".PhoneLoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GroupChatActivity"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"

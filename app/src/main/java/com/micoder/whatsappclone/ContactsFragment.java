@@ -1,5 +1,6 @@
 package com.micoder.whatsappclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -67,10 +68,13 @@ public class ContactsFragment extends Fragment {
             protected void onBindViewHolder(@NonNull ContactsViewHolder holder, int position, @NonNull Contacts model) {
 
                 String userIDs = getRef(position).getKey();
+                final String usersIDs = getRef(position).getKey();
+                final String[] retImage = {"default_image"};
 
                 UsersRef.child(userIDs).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        final String retName = dataSnapshot.child("name").getValue().toString();
                         if (dataSnapshot.exists()) {
 
                             if (dataSnapshot.child("userState").hasChild("state")) {
@@ -106,6 +110,17 @@ public class ContactsFragment extends Fragment {
                                 holder.userName.setText(profileName);
                                 holder.userStatus.setText(profileStatus);
                             }
+
+                            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                    chatIntent.putExtra("visit_user_id", usersIDs);
+                                    chatIntent.putExtra("visit_user_name", retName);
+                                    chatIntent.putExtra("visit_image", retImage[0]);
+                                    startActivity(chatIntent);
+                                }
+                            });
 
                         }
                     }

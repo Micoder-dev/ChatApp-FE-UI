@@ -23,7 +23,7 @@
         <activity
             android:name=".ChatActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />

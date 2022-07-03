@@ -11,6 +11,16 @@
         android:id="@+id/settings_toolbar">
     </include>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/set_profile_image"
         android:layout_width="250dp"
@@ -88,5 +98,8 @@
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         app:neumorph_shadowColorLight="#EFEDED"/>
+
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -6,21 +6,25 @@
         android:id="@+id/bottom_nav_chats"
         android:title="Chats"
         android:icon="@drawable/chat_icon"
-        app:cnb_backgroundColor="#E91E63"/>
+        app:cnb_backgroundColor="#E91E63"
+        app:cnb_textColor="@color/white"/>
     <item
         android:id="@+id/bottom_nav_newFriends"
         android:title="Find Friends"
         android:icon="@drawable/groups_icon"
-        app:cnb_backgroundColor="#FF9800"/>
+        app:cnb_backgroundColor="#FF9800"
+        app:cnb_textColor="@color/black"/>
     <item
         android:id="@+id/bottom_nav_contacts"
         android:title="Contacts"
         android:icon="@drawable/contacts_icon"
-        app:cnb_backgroundColor="#8BC34A"/>
+        app:cnb_backgroundColor="#8BC34A"
+        app:cnb_textColor="@color/black"/>
     <item
         android:id="@+id/bottom_nav_requests"
         android:title="Requests"
         android:icon="@drawable/requests_icon"
-        app:cnb_backgroundColor="#673AB7"/>
+        app:cnb_backgroundColor="#673AB7"
+        app:cnb_textColor="@color/white"/>
 
 </menu>

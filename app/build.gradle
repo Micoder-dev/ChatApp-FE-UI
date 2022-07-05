@@ -52,4 +52,6 @@ dependencies {
 
     implementation 'com.github.fornewid:neumorphism:0.3.2'
     implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
+
+    implementation 'com.github.clans:fab:1.6.2'
 }

@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatsFragment">
+    tools:context=".ChatsFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chats_list"
@@ -13,5 +15,63 @@
         android:layout_alignParentTop="true">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fabMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingRight="10dp"
+        android:paddingBottom="25dp"
+        app:menu_animationDelayPerItem="55"
+        app:menu_buttonSpacing="0dp"
+        app:menu_colorNormal="@color/aqua"
+        app:menu_colorPressed="@android:color/black"
+        app:menu_colorRipple="#99d4d4d4"
+        app:menu_fab_size="normal"
+        app:menu_icon="@drawable/fab_plus"
+        app:menu_labels_colorNormal="#333"
+        app:menu_labels_colorPressed="#444"
+        app:menu_labels_colorRipple="#66efecec"
+        app:menu_labels_cornerRadius="3dp"
+        app:menu_labels_ellipsize="none"
+        app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        app:menu_labels_margin="0dp"
+        app:menu_labels_maxLines="-1"
+        app:menu_labels_padding="8dp"
+        app:menu_labels_position="left"
+        fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        fab:menu_labels_singleLine="false"
+        fab:menu_labels_textColor="#f2f1f1"
+        fab:menu_labels_textSize="15sp"
+        fab:menu_openDirection="up">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabContactDev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/aqua"
+            fab:fab_colorPressed="@android:color/black"
+            fab:fab_label="Contact Developer"
+            fab:fab_size="mini"
+            android:src="@drawable/fab_contact_dev"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/aqua"
+            fab:fab_colorPressed="@android:color/black"
+            fab:fab_label="Share Apps"
+            fab:fab_size="mini"
+            android:src="@drawable/fab_share"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/aqua"
+            fab:fab_colorPressed="@android:color/black"
+            fab:fab_label="Settings"
+            fab:fab_size="mini"
+            android:src="@drawable/fab_settings"/>
+    </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>

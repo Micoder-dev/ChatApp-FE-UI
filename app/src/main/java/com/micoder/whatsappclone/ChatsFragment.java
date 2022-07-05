@@ -1,6 +1,7 @@
 package com.micoder.whatsappclone;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +38,9 @@ public class ChatsFragment extends Fragment {
     private FirebaseAuth mAuth;
     private String currentUserID;
 
+    FloatingActionMenu fabMenu;
+    FloatingActionButton fabSettings, fabShare, fabContactDev;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,6 +54,8 @@ public class ChatsFragment extends Fragment {
 
         chatsList = (RecyclerView) PrivateChatsView.findViewById(R.id.chats_list);
         chatsList.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        fabOptions();
 
         return PrivateChatsView;
     }
@@ -169,6 +178,50 @@ public class ChatsFragment extends Fragment {
             userStatus = itemView.findViewById(R.id.user_status);
             onlineIcon = itemView.findViewById(R.id.user_online_status);
         }
+    }
+
+    public void fabOptions() {
+
+        //FAB
+        fabMenu=PrivateChatsView.findViewById(R.id.fabMenu);
+        fabSettings=PrivateChatsView.findViewById(R.id.fabSettings);
+        fabContactDev=PrivateChatsView.findViewById(R.id.fabContactDev);
+        fabShare=PrivateChatsView.findViewById(R.id.fabShare);
+
+        fabShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My application name");
+                    String shareMessage= "\nLet me recommend you this application\n\n";
+                    shareMessage = shareMessage + "https://play.google.com/store/apps/developer?id=MI_CODER"+"\n\n";
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                    startActivity(Intent.createChooser(shareIntent, "choose one"));
+                } catch(Exception e) {
+                    //e.toString();
+                }
+                fabMenu.close(true);
+            }
+        });
+        fabSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Settings", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(),SettingsActivity.class));
+                fabMenu.close(true);
+            }
+        });
+        fabContactDev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"Loading...",Toast.LENGTH_SHORT).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://micoder-dev.github.io/Resume-Page/"));
+                startActivity(browserIntent);
+                fabMenu.close(true);
+            }
+        });
     }
 
 }

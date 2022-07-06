@@ -107,7 +107,6 @@ public class ChatsFragment extends Fragment {
 
 
                                     final String retName = dataSnapshot.child("name").getValue().toString();
-                                    final String retStatus = dataSnapshot.child("status").getValue().toString();
 
 
                                     holder.userName.setText(retName);
@@ -154,7 +153,7 @@ public class ChatsFragment extends Fragment {
                     @NonNull
                     @Override
                     public ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_display_layout, viewGroup, false);
+                        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_display_chats_layout, viewGroup, false);
                         return new ChatsViewHolder(view);
                     }
                 };

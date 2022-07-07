@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -128,29 +129,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onItemSelected(int i) {
                 Fragment fragment = null;
+
                 switch (i) {
                     case R.id.bottom_nav_chats:
-                        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                            drawerLayout.closeDrawer(GravityCompat.START);
-                        }
+                        drawerClose();
                         fragment = new ChatsFragment();
                         break;
                     case R.id.bottom_nav_newFriends:
-                        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                            drawerLayout.closeDrawer(GravityCompat.START);
-                        }
+                        drawerClose();
                         fragment = new FindFriendsFragment();
                         break;
                     case R.id.bottom_nav_contacts:
-                        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                            drawerLayout.closeDrawer(GravityCompat.START);
-                        }
+                        drawerClose();
                         fragment = new ContactsFragment();
                         break;
                     case R.id.bottom_nav_requests:
-                        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                            drawerLayout.closeDrawer(GravityCompat.START);
-                        }
+                        drawerClose();
                         fragment = new RequestsFragment();
                         break;
                 }
@@ -299,25 +293,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.drawer_profile:
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                drawerClose();
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
             case R.id.drawer_find_friends:
-                Toast.makeText(this, "FF", Toast.LENGTH_SHORT).show();
+                drawerClose();
+                chipNavigationBar.setItemSelected(R.id.bottom_nav_newFriends, true);
+                break;
+            case R.id.drawer_contacts:
+                drawerClose();
+                chipNavigationBar.setItemSelected(R.id.bottom_nav_contacts, true);
                 break;
             case R.id.drawer_chat_requests:
-                Toast.makeText(this, "CR", Toast.LENGTH_SHORT).show();
+                drawerClose();
+                chipNavigationBar.setItemSelected(R.id.bottom_nav_requests, true);
                 break;
             case R.id.drawer_info:
                 Toast.makeText(this, "info", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.drawer_myprofile:
-                Toast.makeText(this, "myprofile", Toast.LENGTH_SHORT).show();
+                drawerClose();
+                Toast.makeText(MainActivity.this,"Loading...",Toast.LENGTH_SHORT).show();
+                Intent myProfileIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://micoder-dev.github.io/Resume-Page/"));
+                startActivity(myProfileIntent);
                 break;
             case R.id.drawer_buymeacoffee:
-                Toast.makeText(this, "buymeacoff", Toast.LENGTH_SHORT).show();
+                drawerClose();
+                Toast.makeText(MainActivity.this,"Loading...",Toast.LENGTH_SHORT).show();
+                Intent coffeeIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.buymeacoffee.com/micoder"));
+                startActivity(coffeeIntent);
                 break;
             case R.id.drawer_github:
-                Toast.makeText(this, "github", Toast.LENGTH_SHORT).show();
+                drawerClose();
+                Toast.makeText(MainActivity.this,"Loading...",Toast.LENGTH_SHORT).show();
+                Intent githubIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Micoder-dev"));
+                startActivity(githubIntent);
                 break;
         }
         return true;
@@ -329,5 +339,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawer(GravityCompat.START);
         }else
             super.onBackPressed();
+    }
+
+    public void drawerClose() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
     }
 }

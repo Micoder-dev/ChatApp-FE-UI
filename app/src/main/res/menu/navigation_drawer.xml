@@ -13,6 +13,10 @@
                 android:icon="@drawable/drawer_find_friends"
                 android:title="Find Friends" />
             <item
+                android:id="@+id/drawer_contacts"
+                android:icon="@drawable/drawer_friend_request"
+                android:title="Contacts" />
+            <item
                 android:id="@+id/drawer_chat_requests"
                 android:icon="@drawable/drawer_friend_request"
                 android:title="Friends Requests" />

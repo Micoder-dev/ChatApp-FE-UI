@@ -1,42 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/colorAccent">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="@android:color/darker_gray">
 
         <include
             android:id="@+id/main_page_toolbar"
-            layout="@layout/app_bar_layout">
-        </include>
+            layout="@layout/app_bar_layout"></include>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_nav_menu"
-        android:layout_below="@+id/appBarLayout"/>
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/bottom_nav_menu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="5dp"
-        app:cnb_menuResource="@menu/bottom_nav_menu"
         android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
         android:background="@drawable/round_corners"
-        app:cnb_unselectedColor="@color/black"
-        app:cnb_radius="30dp"
+        android:elevation="8dp"
+        app:cnb_menuResource="@menu/bottom_nav_menu"
         app:cnb_orientationMode="horizontal"
-        android:elevation="8dp"/>
+        app:cnb_radius="30dp"
+        app:cnb_unselectedColor="@color/black" />
+
+
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        tools:context=".MainActivity">
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:layout_marginBottom="60dp"/>
+
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/navigation_view"
+        app:menu="@menu/navigation_drawer"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/drawer_header"
+        android:layout_gravity="start"
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/round_corners"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
 </RelativeLayout>

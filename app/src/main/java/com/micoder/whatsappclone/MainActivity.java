@@ -1,9 +1,12 @@
 package com.micoder.whatsappclone;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -23,6 +26,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,8 +40,9 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private Toolbar mToolBar;
 
@@ -46,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
     private String currentUserID;
 
     private ChipNavigationBar chipNavigationBar;
+
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +75,19 @@ public class MainActivity extends AppCompatActivity {
         if (mAuth.getCurrentUser() != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChatsFragment()).commit();
         }
+
+        drawerLayout=findViewById(R.id.drawerLayout);
+        navigationView=findViewById(R.id.navigation_view);
+
+        toggle=new ActionBarDrawerToggle(this,drawerLayout,R.string.start,R.string.close);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         bottomMenu();
 
@@ -108,15 +130,27 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (i) {
                     case R.id.bottom_nav_chats:
+                        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }
                         fragment = new ChatsFragment();
                         break;
                     case R.id.bottom_nav_newFriends:
+                        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }
                         fragment = new FindFriendsFragment();
                         break;
                     case R.id.bottom_nav_contacts:
+                        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }
                         fragment = new ContactsFragment();
                         break;
                     case R.id.bottom_nav_requests:
+                        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }
                         fragment = new RequestsFragment();
                         break;
                 }
@@ -198,6 +232,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
 
+        //nav drawer//
+        if (toggle.onOptionsItemSelected(item)){
+            return true;
+        }//nav drawer complete//
+
+
         if (item.getItemId() == R.id.main_logout_option){
             updateUserStatus("offline");
             mAuth.signOut();
@@ -253,4 +293,41 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    //nav drawer
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.drawer_profile:
+                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.drawer_find_friends:
+                Toast.makeText(this, "FF", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.drawer_chat_requests:
+                Toast.makeText(this, "CR", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.drawer_info:
+                Toast.makeText(this, "info", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.drawer_myprofile:
+                Toast.makeText(this, "myprofile", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.drawer_buymeacoffee:
+                Toast.makeText(this, "buymeacoff", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.drawer_github:
+                Toast.makeText(this, "github", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else
+            super.onBackPressed();
+    }
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Features">
+        <menu>
+            <item
+                android:id="@+id/drawer_profile"
+                android:icon="@drawable/drawer_profile"
+                android:title="Profile" />
+            <item
+                android:id="@+id/drawer_find_friends"
+                android:icon="@drawable/drawer_find_friends"
+                android:title="Find Friends" />
+            <item
+                android:id="@+id/drawer_chat_requests"
+                android:icon="@drawable/drawer_friend_request"
+                android:title="Friends Requests" />
+        </menu>
+    </item>
+
+    <item android:title="About">
+        <menu>
+            <item
+                android:id="@+id/drawer_info"
+                android:icon="@drawable/drawer_info"
+                android:title="App info" />
+            <item
+                android:id="@+id/drawer_myprofile"
+                android:icon="@drawable/drawer_about_developer"
+                android:title="About Developer" />
+        </menu>
+    </item>
+
+    <item android:title="Show support">
+        <menu>
+            <item
+                android:id="@+id/drawer_buymeacoffee"
+                android:icon="@drawable/drawer_bmc"
+                android:title="Buy me a Coffee" />
+
+            <item
+                android:id="@+id/drawer_github"
+                android:icon="@drawable/drawer_github"
+                android:title="Follow us on GitHub" />
+
+        </menu>
+    </item>
+
+</menu>

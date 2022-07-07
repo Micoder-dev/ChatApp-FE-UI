@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,11 +38,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -56,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
+
+    private TextView drawerUserName,drawerUserStatus;
+    private CircleImageView drawerProfileImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +100,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomMenu();
 
         checkNetwork();
+
+        View header = navigationView.getHeaderView(0);
+        drawerUserName = (TextView)header.findViewById(R.id.drawer_user_name);
+        drawerUserStatus = (TextView)header.findViewById(R.id.drawer_user_status);
+        drawerProfileImage = (CircleImageView)header.findViewById(R.id.drawer_profile_image);
+
+        RootRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String userName = (String) dataSnapshot.child("Users").child(currentUserID).child("name").getValue().toString();
+                String userStatus = (String) dataSnapshot.child("Users").child(currentUserID).child("status").getValue().toString();
+                String userProfileImage = (String) dataSnapshot.child("Users").child(currentUserID).child("image").getValue().toString();
+
+                drawerUserName.setText(userName);
+                drawerUserStatus.setText(userStatus);
+                Picasso.get().load(userProfileImage).placeholder(R.drawable.profile_image).into(drawerProfileImage);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

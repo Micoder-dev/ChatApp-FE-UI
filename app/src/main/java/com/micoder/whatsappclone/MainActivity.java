@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-
-        RootRef = FirebaseDatabase.getInstance().getReference();
+        currentUserID = mAuth.getCurrentUser().getUid();
+        RootRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
 
         mToolBar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolBar);
@@ -80,9 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         chipNavigationBar = findViewById(R.id.bottom_nav_menu);
         chipNavigationBar.setItemSelected(R.id.bottom_nav_chats, true);
 
-        if (mAuth.getCurrentUser() != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChatsFragment()).commit();
-        }
 
         drawerLayout=findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.navigation_view);
@@ -96,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
 
-
         bottomMenu();
 
         checkNetwork();
@@ -106,25 +102,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerUserStatus = (TextView)header.findViewById(R.id.drawer_user_status);
         drawerProfileImage = (CircleImageView)header.findViewById(R.id.drawer_profile_image);
 
-        RootRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String userName = (String) dataSnapshot.child("Users").child(currentUserID).child("name").getValue().toString();
-                String userStatus = (String) dataSnapshot.child("Users").child(currentUserID).child("status").getValue().toString();
-                String userProfileImage = (String) dataSnapshot.child("Users").child(currentUserID).child("image").getValue().toString();
+        if (mAuth.getCurrentUser() != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChatsFragment()).commit();
 
-                drawerUserName.setText(userName);
-                drawerUserStatus.setText(userStatus);
-                Picasso.get().load(userProfileImage).placeholder(R.drawable.profile_image).into(drawerProfileImage);
+            RootRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-            }
+                    if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name") && (dataSnapshot.hasChild("image")))) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                        String userName = (String) dataSnapshot.child("name").getValue().toString();
+                        String userStatus = (String) dataSnapshot.child("status").getValue().toString();
+                        String userProfileImage = (String) dataSnapshot.child("image").getValue().toString();
 
-            }
-        });
+                        drawerUserName.setText(userName);
+                        drawerUserStatus.setText(userStatus);
+                        Picasso.get().load(userProfileImage).placeholder(R.drawable.profile_image).into(drawerProfileImage);
+
+                    }
+                    else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name"))){
+                        String userName = (String) dataSnapshot.child("name").getValue().toString();
+                        String userStatus = (String) dataSnapshot.child("status").getValue().toString();
+
+                        drawerUserName.setText(userName);
+                        drawerUserStatus.setText(userStatus);
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Please set & update your info...", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
 
     }
 
@@ -225,9 +239,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void VerifyUserExistance() {
-        String currentUserID = mAuth.getCurrentUser().getUid();
 
-        RootRef.child("Users").child(currentUserID).addValueEventListener(new ValueEventListener() {
+        RootRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if ((dataSnapshot.child("name").exists())) {
@@ -311,8 +324,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         onlineStateMap.put("time", saveCurrentTime);
         onlineStateMap.put("date", saveCurrentDate);
         onlineStateMap.put("state", state);
-
-        currentUserID = mAuth.getCurrentUser().getUid();
 
         RootRef.child("Users").child(currentUserID).child("userState")
                 .updateChildren(onlineStateMap);

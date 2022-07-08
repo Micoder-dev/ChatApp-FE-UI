@@ -70,8 +70,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-        currentUserID = mAuth.getCurrentUser().getUid();
-        RootRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
+
+        if (mAuth.getCurrentUser() != null) {
+            currentUserID = mAuth.getCurrentUser().getUid();
+            RootRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
+        }
 
         mToolBar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolBar);

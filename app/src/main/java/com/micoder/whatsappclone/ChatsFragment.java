@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,19 +28,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.todkars.shimmer.ShimmerRecyclerView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatsFragment extends Fragment {
 
     private View PrivateChatsView;
-    private RecyclerView chatsList;
+    private ShimmerRecyclerView chatsList;
     private DatabaseReference ChatsRef, UsersRef;
     private FirebaseAuth mAuth;
     private String currentUserID;
 
     FloatingActionMenu fabMenu;
     FloatingActionButton fabSettings, fabShare, fabContactDev;
+
+    private Handler mHandler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +56,7 @@ public class ChatsFragment extends Fragment {
         ChatsRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(currentUserID);
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-        chatsList = (RecyclerView) PrivateChatsView.findViewById(R.id.chats_list);
+        chatsList = (ShimmerRecyclerView) PrivateChatsView.findViewById(R.id.chats_list);
         chatsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         fabOptions();
@@ -160,6 +164,27 @@ public class ChatsFragment extends Fragment {
 
         chatsList.setAdapter(adapter);
         adapter.startListening();
+
+
+        /* Shimmer layout view type depending on List / Gird */
+        chatsList.setItemViewType((type, position) -> {
+            switch (type) {
+                default:
+                case ShimmerRecyclerView.LAYOUT_LIST:
+                    return position == 0 || position % 2 == 0
+                            ? R.layout.users_display_chats_layout
+                            : R.layout.users_display_chats_layout;
+            }
+        });
+
+
+
+        chatsList.showShimmer();     // to start showing shimmer
+        // To stimulate long running work using android.os.Handler
+        mHandler = new Handler();
+        mHandler.postDelayed((Runnable) () -> {
+            chatsList.hideShimmer(); // to hide shimmer
+        }, 3500);
     }
 
 

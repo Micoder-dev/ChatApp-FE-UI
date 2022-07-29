@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/MI_Coder/Desktop/AppProjects/ChatApp-FE-UI/app/src/main/res/layout/activity_login.xml" value="0.24820512820512822" />
+        <entry key="..\:/Users/MI_Coder/Desktop/AppProjects/ChatApp-FE-UI/app/src/main/res/layout/fragment_chats.xml" value="0.2520833333333333" />
+        <entry key="..\:/Users/MI_Coder/Desktop/AppProjects/ChatApp-FE-UI/app/src/main/res/layout/users_display_chats_layout.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/ChatApp-FE-Design/app/src/main/res/drawable/actionbar_bg.xml" value="0.161" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/ChatApp-FE-Design/app/src/main/res/drawable/buttons.xml" value="0.161" />
         <entry key="..\:/Users/micod/OneDrive/Desktop/AppProjects/ChatApp-FE-Design/app/src/main/res/drawable/cursor.xml" value="0.1715" />

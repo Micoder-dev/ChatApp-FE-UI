@@ -59,14 +59,13 @@ public class ChatsFragment extends Fragment {
         chatsList = (ShimmerRecyclerView) PrivateChatsView.findViewById(R.id.chats_list);
         chatsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        onContentLoaded();
         fabOptions();
 
         return PrivateChatsView;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+    public void onContentLoaded() {
 
         FirebaseRecyclerOptions<Contacts> options =
                 new FirebaseRecyclerOptions.Builder<Contacts>()
